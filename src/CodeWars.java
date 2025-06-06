@@ -1,20 +1,25 @@
 public class CodeWars {
-    public static int convertBits(int a, int b) {
-        String binA = Integer.toBinaryString(a);
-        String binB = Integer.toBinaryString(b);
+    public static String getIssuer(String cardNumber) {
+        String type = "";
+        
+        if (cardNumber.length() == 15 && (cardNumber.startsWith("34") || cardNumber.startsWith("37"))) {
+            type = "AMEX";
+        } else if (cardNumber.length() == 16 && (cardNumber.startsWith("6011"))) {
+            type = "Discover";
+        } else if (cardNumber.length() == 16 && (
+                cardNumber.startsWith("51") ||
+                cardNumber.startsWith("52") ||
+                cardNumber.startsWith("53") ||
+                cardNumber.startsWith("54") ||
+                cardNumber.startsWith("55") 
+        )) {
+            type = "Mastercard";
+        } else if ((cardNumber.length() == 16 || cardNumber.length() == 13) && cardNumber.startsWith("4")) {
+            type = "VISA";
+        } else {
+            type = "Unknown";
 
-        int lenA = binA.length();
-        int lenB = binB.length();
-        int minLen = Math.min(lenA, lenB);
-        int count = 0;
-
-        for (int i = 1; i <= minLen; i++) {
-            char bitA = binA.charAt(lenA - i);
-            char bitB = binB.charAt(lenB - i);
-            if (bitA != bitB) {
-                count++;
-            }
         }
-        return count + Math.abs(lenA - lenB);
+        return type;
     }
 }
