@@ -12,6 +12,7 @@ public class CodeWars {
                     sb.append(last = arr[i].charAt(j));
                 }
             }
+
             res[i] = sb.toString();
             sb.setLength(0);
         }
