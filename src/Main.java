@@ -1,9 +1,14 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
+    public static String solution(int value) {
+
+        return "";
+    }
+
     public static void main(String[] args) {
-
-        System.out.println(Arrays.toString(CodeWars.dup(new String[]{"abraacadabra","allottee","assessee"})));
-
+        String stringAf = "Value is 00005";
+        System.out.println(solution(stringAf));
     }
 }
