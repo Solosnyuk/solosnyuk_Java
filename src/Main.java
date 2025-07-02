@@ -1,24 +1,37 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static Map<String, Integer> bublSort(String stroka) {
-        Map<String, Integer> result = new HashMap<>();
-
-        String[] words = stroka
-                .toLowerCase()
-                .split(" ");
-
-        for (String word : words) {
-            result.merge(word, 1, (worldOld1, worldOld2) -> worldOld1 + worldOld2);
+    public static void bublSort(ArrayList stroka) {
+        for (int i = 0; i < stroka.size(); i++) {
+            System.out.println(stroka.get(i));
         }
+    }
 
+    public static void whileArrays (ArrayList stroka) {
+        int i = 0;
+        while (i < stroka.size()) {
+            System.out.println(stroka.get(i));
+            i++;
+        }
+    }
 
-        return result;
+    public static <T> void  forEachArrays (ArrayList<T> stroka) {
+        for (T element : stroka) {
+            System.out.println(element);
+        }
     }
 
     public static void main(String[] args) {
-        String stroka = "Напишите напишите программу на Java для подсчета количества конкретных слов в строке, используя HashMap";
-        System.out.println(bublSort(stroka));
+        ArrayList<Integer> listNum = new ArrayList<>();
+        listNum.add(2);
+        listNum.add(5);
+        listNum.add(9);
+
+        ArrayList<String> listString = new ArrayList<>(List.of("sss", "bbb", "ffff"));
+
+        forEachArrays(listString);
     }
 }
