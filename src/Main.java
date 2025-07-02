@@ -1,5 +1,6 @@
-import java.sql.Array;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void bublSort(int[] sortArr) {
@@ -15,8 +16,16 @@ public class Main {
         System.out.println(Arrays.toString(sortArr));
     }
 
+    public static int[] deleteNth(int[] elements, int maxOccurrences) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        return Arrays.stream(elements)
+                .filter(element -> map.merge(element,1,Integer::sum) <= maxOccurrences)
+                .toArray();
+
+    }
+
     public static void main(String[] args) {
-        int[] sortArr = {12, 6, 4, 1, 15, 10};
-        bublSort(sortArr);
+        int[] arr = { 20, 37, 20, 21 };
+        System.out.println(deleteNth(arr,1));
     }
 }
