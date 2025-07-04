@@ -1,37 +1,21 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Main {
-    public static void bublSort(ArrayList stroka) {
-        for (int i = 0; i < stroka.size(); i++) {
-            System.out.println(stroka.get(i));
+    public static int substringCount(String fullText, String search) {
+        int count = 0;
+        for (int i = 0; i < fullText.length(); i++) {
+            if (fullText.startsWith(search, i)) {
+                i += search.length() - 1;
+                count++;
+            }
         }
-    }
-
-    public static void whileArrays (ArrayList stroka) {
-        int i = 0;
-        while (i < stroka.size()) {
-            System.out.println(stroka.get(i));
-            i++;
-        }
-    }
-
-    public static <T> void  forEachArrays (ArrayList<T> stroka) {
-        for (T element : stroka) {
-            System.out.println(element);
-        }
+        return count;
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> listNum = new ArrayList<>();
-        listNum.add(2);
-        listNum.add(5);
-        listNum.add(9);
-
-        ArrayList<String> listString = new ArrayList<>(List.of("sss", "bbb", "ffff"));
-
-        forEachArrays(listString);
+        int num = 53421;
+        String str = "2plus2plus3plus4";
+        System.out.println(substringCount("aa_bbb_cc_dd_b_e","bb"));
     }
 }
