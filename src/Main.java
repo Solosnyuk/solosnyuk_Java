@@ -1,22 +1,14 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
+
+import static java.util.stream.IntStream.iterate;
 
 public class Main {
-    public static int countSmileys(List<String> arr) {
-        int count = 0;
-        for (String smile : arr) {
-            if (smile.matches("[:;][-~]?[)D]")) {
-                count++;
-            }
-        }
-        return count;
+    public static int [][] multiplicationTable(int n){
+        return
     }
 
     public static void main(String[] args) {
-        List<String> a = new ArrayList<>();
-        a.add(":)"); a.add("XD"); a.add(":0}"); a.add("x:-"); a.add("):-"); a.add("D:");
-        System.out.println(countSmileys(a));
-
+        System.out.println();
     }
 }
