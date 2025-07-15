@@ -5,33 +5,23 @@ import java.util.stream.Stream;
 import static java.util.stream.IntStream.iterate;
 
 public class Main {
-    public static int [][] multiplicationTable(int n){
-        int[][] newArr = new int[n][n];
-        for (int i = 1; i <= n; i++) {
-            int countIn = i;
-            for (int j = 0; j < n; j ++) {
-                newArr[i - 1][j] = countIn;
-                countIn += i;
+        public static int findIt(int[] a) {
+            Map<Integer,Integer> val = new HashMap<>();
+
+            for (int i = 0; i < a.length; i++) {
+                val.put(a[i], val.getOrDefault(a[i], 0) +1);
             }
-        }
-        return newArr;
-    }
 
-    public static String sumStr(String a, String b){
-        if (a.isEmpty()) {
-            return b;
-        }else if (b.isEmpty()){
-            return a;
-        } else if (a.isEmpty() && b.isEmpty()){
-            return "0";
-        }else {
-            return String.valueOf(Integer.parseInt(a) + Integer.parseInt(b));
-        }
-    }
+            for (Map.Entry<Integer, Integer> entry : val.entrySet()) {
+                if (entry.getValue() % 2 == 1){
+                    return entry.getKey();
+                }
+            }
 
+            return 0;
+        }
 
         public static void main(String[] args) {
-        System.out.println(Arrays.deepToString(multiplicationTable(3)));
-            System.out.println(sumStr("","1"));
+            System.out.println(findIt(new int[] {1,1,3,4,4,5,5}));
     }
 }
