@@ -1,27 +1,26 @@
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.IntStream.iterate;
 
 public class Main {
-        public static int findIt(int[] a) {
-            Map<Integer,Integer> val = new HashMap<>();
-
-            for (int i = 0; i < a.length; i++) {
-                val.put(a[i], val.getOrDefault(a[i], 0) +1);
-            }
-
-            for (Map.Entry<Integer, Integer> entry : val.entrySet()) {
-                if (entry.getValue() % 2 == 1){
-                    return entry.getKey();
+    public int solve(int x, int y) {
+        int count = 0;
+        for (Integer i = x; i < y; i++) {
+            boolean turn = true;
+                if (i.toString().matches("[2,3,4,5,7,9]")){
+                    turn = false;
                 }
-            }
-
-            return 0;
+                if (turn){
+                    count++;
+                }
         }
+        return count;
+    }
 
         public static void main(String[] args) {
-            System.out.println(findIt(new int[] {1,1,3,4,4,5,5}));
+            System.out.println();
     }
 }
