@@ -6,21 +6,39 @@ import java.util.stream.Stream;
 import static java.util.stream.IntStream.iterate;
 
 public class Main {
-    public int solve(int x, int y) {
-        int count = 0;
-        for (Integer i = x; i < y; i++) {
-            boolean turn = true;
-                if (i.toString().matches("[2,3,4,5,7,9]")){
-                    turn = false;
-                }
-                if (turn){
-                    count++;
-                }
+    public static String removeBang(String str) {
+        if (str.isEmpty()){
+            return "";
         }
-        return count;
+        String[] arr = str.split(" ");
+        StringBuilder newStr = new StringBuilder();
+        for (String hi : arr) {
+            while (hi.charAt(hi.length() -1) == '!') {
+                    hi = hi.substring(0, hi.length() - 1);
+                }
+            newStr.append(hi).append(" ");
+            }
+        return newStr.toString().trim();
+    }
+
+    public static int findNthOccurrence(String subStr, String str, int occurrence) {
+        int count = 0;
+        for (int i = 0; i < subStr.length() - str.length(); i++) {
+            if (subStr.startsWith(str,i)){
+                count++;
+                if (count == occurrence){
+                    return i;
+                }
+                i += str.length();
+            }
+        }
+        if (count < occurrence){
+            return -1;
+        }
+        return -1;
     }
 
         public static void main(String[] args) {
-            System.out.println();
+            System.out.println(findNthOccurrence("Test1 Test2 Test3 Test4","Test",1));
     }
 }
