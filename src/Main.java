@@ -1,30 +1,65 @@
 import java.util.*;
 
 public class Main {
-//1, 2, 3, 4, 4, 5, 6, 7, 7, 7 4
-    public static void searchNum(int[] arr){
-        Map<Integer, Integer> map = new HashMap<>();
-
-        for (int num : arr) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+    public static String[] fizzArray2(int n) {
+        if (n == 0){
+            return new String[0];
         }
-
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            System.out.println("Число " + entry.getKey() + " количество раз: " + entry.getValue());
+        String[] arr = new String[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = String.valueOf(i);
         }
+        return arr;
     }
 
+    public static boolean no14(int[] nums) {
+        for (int num : nums) {
+            if (num == 4){
+                for (int i : nums) {
+                    if (i == 1){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isEverywhere(int[] nums, int val) {
+        if (nums.length == 0){
+            return true;
+        }
+
+        for (int i = 0; i < nums.length - 1; i ++) {
+            if (nums[i] != val && nums[i + 1] != val){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean either24(int[] nums) {
+        int count = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == 2 && nums[i + 1] == 2){
+                count++;
+            }
+            if (nums[i] == 4 && nums[i + 1] == 4){
+                count++;
+            }
+        }
+        if (count >= 2 ){
+            return false;
+        }
+        return true;
+    }
+
+    public static int matchUp(int[] nums1, int[] nums2) {
+
+    }
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 4, 5, 6, 7, 7, 7, 4};
-        searchNum(arr);
-
-        String st = "qq  ss jh kk a aff   jg";
-
-        String[] arrNew = st.split(" ss ");
-        System.out.println(arrNew[0].toUpperCase() + " " + arrNew[1].toLowerCase());
-
-        System.out.println(st.replaceAll(" ", "").substring(0,10));
+        System.out.println(matchUp(new int[]{1, 2, 3}, new int[]{2, 3, 10}));
     }
 }
 
