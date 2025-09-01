@@ -1,90 +1,72 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
-    public static Map<String, String> topping2(Map<String, String> map) {
-        if (map.containsKey("ice cream")){
-            map.put("yogurt",map.get("ice cream"));
-        }
-        if (map.containsKey("spinach")){
-            map.put("spinach", "nuts");
-        }
-        return map;
-    }
-
-    public static Map<String, String> topping3(Map<String, String> map) {
-        if (map.containsKey("potato")){
-            map.put("fries",map.get("potato"));
-        }
-        if (map.containsKey("salad")){
-            map.put("spinach",map.get("salad"));
-        }
-        return map;
-    }
-
-    public Map<String, String> mapAB4(Map<String, String> map) {
-
-        if (map.containsKey("a") && map.containsKey("b")) {
-            if (map.get("a").length() != map.get("b").length()) {
-                if (map.get("a").length() > map.get("b").length()) {
-                    map.put("c", map.get("a"));
-                } else {
-                    map.put("c", map.get("b"));
-                }
-                return map;
-            }
-            if (map.get("a").length() == map.get("b").length()) {
-                map.put("a", "");
-                map.put("b", "");
-                return map;
+    public static String wordAppend(String[] strings) {
+        Map<String, Integer> count = new HashMap<>();
+        StringBuilder result = new StringBuilder();
+        for (String word : strings) {
+            count.put(word, count.getOrDefault(word, 0) + 1);
+            if (count.get(word) % 2 == 0) {
+                result.append(word);
             }
         }
-        return map;
+        return result.toString();
     }
 
-    public static Map<String, Integer> word0(String[] strings) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(string,0);
+    public Map<String, Boolean> wordMultiple(String[] strings) {
+        Map<String, Integer> count = new HashMap<>();
+        Map<String, Boolean> countBoolean = new HashMap<>();
+
+        for (String word : strings) {
+            count.put(word, count.getOrDefault(word, 0) + 1);
         }
-        return map;
+
+        for (String s : count.keySet()) {
+            if (count.get(s) >= 2){
+                countBoolean.put(s, true);
+            }else{
+                countBoolean.put(s, false);
+            }
+        }
+        return countBoolean;
     }
 
-    public Map<String, Integer> wordLen(String[] strings) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(string,string.length());
-        }
-        return map;
+    public List<String> noYY(List<String> strings) {
+        return strings.stream()
+                .filter(n -> !n.isEmpty())
+                .filter(n -> !n.contains("yy"))
+                .filter(n -> n.charAt(n.length() - 1) != 'y')
+                .map(n -> n + "y")
+                .collect(Collectors.toList());
     }
 
-    public Map<String, String> pairs(String[] strings) {
-        Map<String, String> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(Character.toString(string.charAt(0)), Character.toString(string.charAt(string.length())));
-        }
-        return map;
+    public List<Integer> two2(List<Integer> nums) {
+        return nums.stream()
+                .map(n -> n * 2)
+                .filter(n -> !String.valueOf(n).endsWith("2"))
+                .collect(Collectors.toList());
     }
 
-    public static Map<String, Integer> wordCount(String[] strings) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(string, map.getOrDefault(string, 0) + 1);
-        }
-        return map;
+    public List<Integer> square56(List<Integer> nums) {
+        return nums.stream()
+                .map(n -> (n * n) + 10)
+                .filter(n -> !String.valueOf(n).endsWith("6") ||
+                                     !String.valueOf(n).endsWith("5"))
+                .collect(Collectors.toList());
     }
 
-    public Map<String, String> firstChar(String[] strings) {
-        Map<String, String> map = new HashMap<>();
-        for (String string : strings){
-            map.put(Character.toString(string.charAt(0)) ,
-                    map.getOrDefault(Character.toString(string.charAt(0)), "") + string);
-        }
-        return map;
+    public List<String> no34(List<String> strings) {
+        return strings.stream()
+                .filter(n -> n.length() != 3 || n.length() !=4)
+                .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
-        System.out.println(wordCount(new String[]{"a", "b", "a", "c", "b"}));
+        System.out.println(wordAppend(new String[]{"a", "b", "a"}));
     }
 }
 
