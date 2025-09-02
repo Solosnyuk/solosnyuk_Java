@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,8 +66,108 @@ public class Main {
                 .collect(Collectors.toList());
     }
 
+    public static boolean sameEnds(int[] nums, int len) {
+        for (int i = 0; i < len; i++) {
+            if (nums[i] != nums[nums.length - len + i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean tripleUp(int[] nums) {
+        if (nums.length < 3){
+            return false;
+        }
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (nums[i] == (nums[i + 1] - 1)){
+                if (nums[i + 1] == (nums[i + 2] -1)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static int[] fizzArray3(int start, int end) {
+        int[] arr = new int[end - start];
+        int index = 0;
+        for (int i = start; i < end; i++) {
+            arr[index] = i;
+            index++;
+        }
+        return arr;
+    }
+
+    public static int[] shiftLeft(int[] nums) {
+        if (nums.length == 0){
+            return nums;
+        }
+        int app = nums[0];
+        for (int i = 0; i < nums.length -1; i++) {
+            nums[i] = nums[i+1];
+        }
+        nums[nums.length - 1] = app;
+        return nums;
+    }
+
+    public static int[] tenRun(int[] nums) {
+        int then = 0;
+        boolean bol = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] % 10 == 0){
+                then = nums[i];
+                bol = true;
+            }
+            if (bol){
+                nums[i] = then;
+            }
+        }
+        return nums;
+    }
+
+    public static int[] pre4(int[] nums) {
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 4){
+                index = i;
+                break;
+            }
+        }
+        return Arrays.copyOfRange(nums,0,index);
+    }
+
+    public static int[] post4(int[] nums) {
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 4){
+                index = i + 1;
+            }
+        }
+        return Arrays.copyOfRange(nums,index,nums.length );
+    }
+
+    public String doubleChar(String str) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            stringBuilder.append(str.charAt(i));
+            stringBuilder.append(str.charAt(i));
+        }
+        return stringBuilder.toString();
+    }
+
+    public static int countHi(String str) {
+        int count = 0;
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (str.substring(i, i + 2).equals("hi")){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
-        System.out.println(wordAppend(new String[]{"a", "b", "a"}));
+        System.out.println(countHi("abc hi ho"));
     }
 }
 
