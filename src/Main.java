@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -161,9 +161,131 @@ public class Main {
         return false;
     }
 
+    public boolean endOther(String a, String b) {
+        if (a.toLowerCase().contentEquals(b.toLowerCase()) || b.toLowerCase().contentEquals(a.toLowerCase())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean xyzThere(String str) {
+        int len = str.length();
+        int newLen = str.replaceAll("\\.xyz","").length();
+        int newL = str.replaceAll("xyz","").length();
+
+        if (len - newLen == 0){
+            return false;
+        }
+        if (len - newL == 0){
+            return false;
+        }
+        return ((len - newLen) > 0) ? false : true;
+    }
+
+    public boolean xyzMiddle(String str) {
+        for (int i = 0; i < str.length() - 2; i++) {
+            if (str.substring(i, i + 2).equals("xyz")){
+                int left = i - 1;
+                int right = str.length() - (i + 2);
+                if (Math.abs(left - right) < 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public String frontTimes(String str, int n) {
+        String copy = (str.length() < 3) ? str.substring(0,str.length()) : str.substring(0,3);
+        StringBuilder newSt = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            newSt.append(copy);
+        }
+        return newSt.toString();
+    }
+
+    int countXX(String str) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.substring(i,i+1) =="xx"){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int loneSum(int a, int b, int c) {
+        int sum = 0;
+
+        if (a != b && a != c) sum += a;
+        if (b != a && b != c) sum += b;
+        if (c != a && c != b) sum += c;
+
+        return sum;
+    }
+
+    public int luckySum(int a, int b, int c) {
+        if (a == 13) return 0;
+        if (b == 13) return a;
+        if (c == 13) return a + b;
+        return a + b + c;
+    }
+
+    public int roundSum(int a, int b, int c) {
+        return round10(a) + round10(b) + round10(c);
+    }
+
+    public int round10(int num) {
+        if (num % 10 >= 5) {
+            return num + (10 - num % 10);
+        } else {
+            return num - (num % 10);
+        }
+    }
+
+    public static int blackjack(int a, int b) {
+        if (a > 21 && b > 21) return 0;
+        if (a > 21) return b;
+        if (b > 21) return a;
+        return Math.max(a,b);
+    }
+
+    public String oneTwo(String str) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < str.length() - 2; i += 3) {
+                stringBuilder.append(str.charAt(i + 1));
+                stringBuilder.append(str.charAt(i + 2));
+                stringBuilder.append(str.charAt(i));
+        }
+        return stringBuilder.toString();
+    }
+
+    public String wordEnds(String str, String word) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < str.length() - word.length(); i++) {
+            if (str.substring(i, i + word.length()).equals(word)){
+                if (i != 0) stringBuilder.append(str.charAt(i - 1));
+                if (i + word.length() != str.length()) stringBuilder.append(str.charAt(i + word.length() + 1));
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String createPhoneNumber(int[] numbers) {
+       StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < numbers.length; i++) {
+            if (i == 0) stringBuilder.append('(');
+            if (i == 3) stringBuilder.append(") ");
+            if (i == 6) stringBuilder.append('-');
+            stringBuilder.append(numbers[i]);
+        }
+       return stringBuilder.toString();
+    }
+
+
 
     public static void main(String[] args) {
-        System.out.println(countCode("aaacodebbb"));
+        System.out.println(createPhoneNumber(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}));
     }
 }
 
