@@ -1,40 +1,50 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
-    public static int sumNumbers(String str) {
-        int sum = 0;
-        String string = "";
+    public static int maxBlock(String str) {
+        if (str.isEmpty()) return 0;
 
-        for (int i = 0; i < str.length(); i++) {
-            if (Character.isDigit(str.charAt(i))) {
-                    string += str.charAt(i);
-            }else{
-                if (!string.isEmpty()) {
-                    sum += Integer.parseInt(string);
-                    string = "";
+        int max = 0;
+        int count = 0;
+
+        for (int i = 1; i < str.length(); i++) {
+            if (str.charAt(i) == str.charAt(i - 1)){
+                count++;
+                if (count > max){
+                    max = count;
                 }
+            } else {
+                count = 0;
             }
         }
-        return sum;
+        return max + 1;
     }
 
-    public static String mirrorEnds(String string) {
-        String result = "";
-
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == string.charAt(string.length() - 1 - i)) {
-                result += string.charAt(i);
-            } else {
-                break;
+    public static String sameEnds(String string) {
+        String sub = "";
+        for (int i = 0; i <= string.length() / 2 ; i++) {
+            if (string.substring(0, i).equals(string.substring(string.length() - i))){
+                sub = string.substring(0, i);
             }
         }
+        return sub;
+    }
 
-        return result;
+    public static boolean evenlySpaced(int a, int b, int c) {
+        int max = (Math.max(a, c) < b) ? b : Math.max(a,c);
+        int min = (Math.min(a, c) < b) ?  Math.min(a,c) : b;
+        int sred = (a + b + c) - (max + min);
+        if ((max - sred) == (sred - min)){
+            return true;
+        }
+        return false;
+    }
+
+    public int maxSpan(int[] nums) {
+        return nums.length - 1;
+
     }
 
     public static void main(String[] args) {
-            System.out.println(mirrorEnds("abcda"));
+        System.out.println(evenlySpaced(9, 10, 11));
     }
 }
 
