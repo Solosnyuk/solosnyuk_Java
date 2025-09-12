@@ -1,123 +1,71 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class Main {
-    public int bunnyEars(int bunnies) {
-        if (bunnies == 0) return 0;
-        return 2 + bunnyEars(bunnies - 1);
-    }
-
-    public Map<String, Integer> word0(String[] strings) {
-        Map<String,Integer> map = new HashMap<>();
-        for (int i = 0; i < strings.length; i++) {
-            map.put(strings[i], 0);
-        }
-        return map;
-    }
-
-    public Map<String, Integer> wordLen(String[] strings) {
-        Map<String,Integer> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(string,string.length());
-        }
-        return map;
-    }
-
-    public Map<String, String> pairs(String[] strings) {
-        Map<String,String> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(Character.toString(string.charAt(0)),
-                    Character.toString(string.charAt(string.length())));
-        }
-        return map;
-    }
-
-    public Map<String, Integer> wordCount(String[] strings) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String s : strings) {
-            map.put(s, map.getOrDefault(s,0) + 1);
-        }
-        return map;
-    }
-
-    public Map<String, String> firstChar(String[] strings) {
-        Map<String, String> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(Character.toString(string.charAt(0)),
-                   map.getOrDefault(Character.toString(string.charAt(0)), "") + string);
-        }
-        return map;
-    }
-
-    public String wordAppend(String[] strings) {
-        String result = "";
-        Map<String, Integer> map = new HashMap<>();
-        for (String string : strings) {
-            map.put(string,map.getOrDefault(string,0) + 1);
-
-            if ((map.getOrDefault(string, 0) + 1) % 2 == 0) {
-                result += (string);
+    public static boolean dividesSelf(int n) {
+        int digit;
+        int orig = n;
+        while (n > 0){
+            digit = n % 10;
+            n = n / 10;
+            if (orig % digit != 0){
+                return false;
             }
         }
-        return result;
+        return true;
     }
 
-    public int maxSpan(int[] nums) {
-        int span = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            if (!map.containsKey(num)){
-                map.put(num,i);
+    public int matchUp(String[] a, String[] b) {
+        int count = 0;
+        for (int i = 0; i < a.length; i++) {
+            if (!a[i].isEmpty() && !b[i].isEmpty()){
+                if (a[i].charAt(0) == b[i].charAt(0)){
+                    count++;
+                }
             }
-            int sp = i - map.get(num) + 1;
-            span = Math.max(span, sp);
         }
-        return span;
+        return count;
     }
 
-    public int[] fix34(int[] nums) {
-        List<Integer> indexList = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 4 && (nums[i - 1] != 3 || nums[i] == 0)){
-                indexList.add(i);
-            }
-        }
-
-        int indexFour = 0;
-
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 3 && nums[i + 1] != 4){
-                int dep = nums[i + 1];
-                int swap = indexList.get(indexFour++);
-                nums[swap] = dep;
-                nums[i + 1] = 4;
-            }
-        }
-        return nums;
+    public int scoresSpecial(int[] a, int[] b) {
+        return Math.max(maxPoint(a),maxPoint(b));
     }
 
-    public int[] fix45(int[] nums) {
-        List<Integer> indexList = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 5){
-                indexList.add(i);
+    public int maxPoint(int[] arr){
+        int maxPoint = 0;
+        for (int i : arr) {
+            if (i % 10 == 0){
+                maxPoint = Math.max(maxPoint, i);
             }
         }
+        return maxPoint;
+    }
 
-        int indexFive = 0;
-
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] == 4 && nums[i + 1] != 5){
-                int dep = nums[i + 1];
-                int swap = indexList.get(indexFive++);
-                nums[swap] = dep;
-                nums[i + 1] = 5;
+    public static int bigHeights(int[] heights, int start, int end) {
+        int count = 0;
+        for (int i = start; i < end ; i++) {
+            if (5 <=(Math.max(heights[i], heights[i + 1]) - Math.min(heights[i], heights[i + 1]))){
+               count++;
             }
         }
-        return nums;
+        return count;
+    }
+
+    public int scoreUp(String[] key, String[] answers) {
+        int sum = 0;
+        for (int i = 0; i < key.length; i++) {
+            if (answers[i].charAt(0) != '?'){
+                if (key[i].charAt(0) == answers[i].charAt(0)){
+                    sum += 4;
+                }else{
+                    sum -= 1;
+                }
+            }
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
+        System.out.println(bigHeights(new int[]{5, 3, 6, 7, 2},0,1));
     }
 }
 
