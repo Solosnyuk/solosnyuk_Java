@@ -64,6 +64,67 @@ public class Main {
         return sum;
     }
 
+    public int commonTwo(String[] a, String[] b) {
+        int count = 0;
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b.length; j++) {
+                if (Character.getNumericValue(a[i].charAt(0)) <=
+                        Character.getNumericValue(b[i].length()) ) {
+                    if (a[i].equals(b[i])) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    public String[] mergeTwo(String[] a, String[] b, int n) {
+        String[] result = new String[n];
+        int i = 0, j = 0, index = 0;
+
+        while (index < n) {
+            // Если закончился массив a, берем из b
+            if (i >= a.length) {
+                result[index] = b[j];
+                j++;
+                index++;
+                continue;
+            }
+
+            // Если закончился массив b, берем из a
+            if (j >= b.length) {
+                result[index] = a[i];
+                i++;
+                index++;
+                continue;
+            }
+
+            // Сравниваем текущие элементы
+            int compare = a[i].compareTo(b[j]);
+
+            if (compare < 0) {
+                // Элемент из a меньше
+                result[index] = a[i];
+                i++;
+                index++;
+            } else if (compare > 0) {
+                // Элемент из b меньше
+                result[index] = b[j];
+                j++;
+                index++;
+            } else {
+                // Элементы равны - добавляем один и пропускаем оба
+                result[index] = a[i];
+                i++;
+                j++;
+                index++;
+            }
+        }
+
+        return result;
+    }
+    
     public static void main(String[] args) {
         System.out.println(bigHeights(new int[]{5, 3, 6, 7, 2},0,1));
     }
