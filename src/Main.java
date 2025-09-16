@@ -1,132 +1,72 @@
-import java.util.Arrays;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
-    public static boolean dividesSelf(int n) {
-        int digit;
-        int orig = n;
-        while (n > 0){
-            digit = n % 10;
-            n = n / 10;
-            if (orig % digit != 0){
-                return false;
-            }
+    //Напишите код, который профильтрует дублирующиеся элементы
+    // в массиве и выведет их в виде списка.
+    public static List<Integer> duplicate(int[] arr){
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : arr) {
+            map.put(num, map.getOrDefault(num,0) + 1);
         }
-        return true;
+        return map.entrySet().stream()
+                .filter(n -> n.getValue() > 1)
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
     }
 
-    public int matchUp(String[] a, String[] b) {
-        int count = 0;
-        for (int i = 0; i < a.length; i++) {
-            if (!a[i].isEmpty() && !b[i].isEmpty()){
-                if (a[i].charAt(0) == b[i].charAt(0)){
-                    count++;
-                }
-            }
-        }
-        return count;
+    //Дайте пример кода, который сортирует
+    // список строк с использованием коллекции.
+
+    public static void showList(String[] array) {
+       Arrays.sort(array);
     }
 
-    public int scoresSpecial(int[] a, int[] b) {
-        return Math.max(maxPoint(a),maxPoint(b));
-    }
-
-    public int maxPoint(int[] arr){
-        int maxPoint = 0;
-        for (int i : arr) {
-            if (i % 10 == 0){
-                maxPoint = Math.max(maxPoint, i);
-            }
-        }
-        return maxPoint;
-    }
-
-    public static int bigHeights(int[] heights, int start, int end) {
-        int count = 0;
-        for (int i = start; i < end ; i++) {
-            if (5 <=(Math.max(heights[i], heights[i + 1]) - Math.min(heights[i], heights[i + 1]))){
-               count++;
-            }
-        }
-        return count;
-    }
-
-    public int scoreUp(String[] key, String[] answers) {
-        int sum = 0;
-        for (int i = 0; i < key.length; i++) {
-            if (answers[i].charAt(0) != '?'){
-                if (key[i].charAt(0) == answers[i].charAt(0)){
-                    sum += 4;
-                }else{
-                    sum -= 1;
-                }
-            }
-        }
-        return sum;
-    }
-
-    public int commonTwo(String[] a, String[] b) {
-        int count = 0;
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < b.length; j++) {
-                if (Character.getNumericValue(a[i].charAt(0)) <=
-                        Character.getNumericValue(b[i].length()) ) {
-                    if (a[i].equals(b[i])) {
-                        count++;
-                    }
-                }
-            }
-        }
-        return count;
-    }
-
-    public String[] mergeTwo(String[] a, String[] b, int n) {
-        String[] result = new String[n];
-        int i = 0, j = 0, index = 0;
-
-        while (index < n) {
-            // Если закончился массив a, берем из b
-            if (i >= a.length) {
-                result[index] = b[j];
-                j++;
-                index++;
-                continue;
-            }
-
-            // Если закончился массив b, берем из a
-            if (j >= b.length) {
-                result[index] = a[i];
-                i++;
-                index++;
-                continue;
-            }
-
-            // Сравниваем текущие элементы
-            int compare = a[i].compareTo(b[j]);
-
-            if (compare < 0) {
-                // Элемент из a меньше
-                result[index] = a[i];
-                i++;
-                index++;
-            } else if (compare > 0) {
-                // Элемент из b меньше
-                result[index] = b[j];
-                j++;
-                index++;
-            } else {
-                // Элементы равны - добавляем один и пропускаем оба
-                result[index] = a[i];
-                i++;
-                j++;
-                index++;
-            }
+    //Напишите функцию, которая переворачивает число
+    // (порядок цифр в нем изменяет на противоположный, инвертирует).
+    public static long doInvert(long number) {
+        long result = 0;
+        while (number > 0){
+            long dig = number % 10;
+            result = result * 10 + dig;
+            number = number / 10;
         }
 
         return result;
     }
-    
+
+    // Напишите метод проверки, является ли введенное число простым числом
+    public static boolean checkPrime(int n) {
+        return BigInteger.valueOf(n).isProbablePrime(10);
+    }
+
+    //Напишите метод поиска двух самых больших значений в массиве.
+    public static int[] getTwoMaxValues(int[] nums) {
+        return Arrays.stream(nums)
+                .boxed()
+                .sorted(Comparator.reverseOrder())
+                .limit(2)
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+
+    // Напишите код, который удаляет из строки лишние пробелы.
+    public  static String deletS(String input) {
+        return input.replaceAll(" +", " ");
+    }
+
+    // Напишите код, проверяющий, является ли введенное число палиндромом
+    public static Boolean chekPalindrom(int num){
+
+        return true;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(bigHeights(new int[]{5, 3, 6, 7, 2},0,1));
+        System.out.println();
     }
 }
 
