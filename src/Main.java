@@ -1,42 +1,28 @@
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
-    public static int[] seriesUp(int n) {
-        int[] intArr = new int[n*(n + 1)/2];
-        int index = 0;
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= i ; j++) {
-                intArr[index++] = j;
-            }
-        }
-        return intArr;
+    public static String withoutString(String base, String remove) {
+        return base.replaceAll("(?i)" + remove, "");
     }
 
-    public static int maxMirror(int[] nums) {
-        int maxCount = 0;
-        int count = 0;
-        int indexLeft = 0;
-        int indexRight = 0;
+    public boolean gHappy(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == 'g') {
+                boolean leftHappy = (i > 0) && (str.charAt(i - 1) == 'g');
+                boolean rightHappy = (i < str.length() - 1) && (str.charAt(i + 1) == 'g');
 
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length - j; j++) {
-                if (nums[i + indexLeft++] == nums[j - indexRight++]){
-                    count++;
-                    if (count > maxCount){
-                        maxCount = count;
-                    }
-                }else{
-                    indexLeft = 0;
-                    indexRight = 0;
+                if (!leftHappy && !rightHappy) {
+                    return false;
                 }
             }
         }
-        return maxCount;
+        return true;
     }
 
-
     public static void main(String[] args) {
-        System.out.println(maxMirror(new int[]{1, 2, 3, 8, 9, 3, 2, 1}));
+        System.out.println(withoutString("Hello there", "llo"));
     }
 }
 
