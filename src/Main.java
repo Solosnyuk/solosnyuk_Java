@@ -21,6 +21,10 @@ public class Main {
         return true;
     }
 
+    public String notReplace(String str) {
+        return str.replaceAll("(?<![a-zA-Z])is(?![a-zA-Z])", "is not");
+    }
+
     public static void main(String[] args) {
         System.out.println(withoutString("Hello there", "llo"));
     }
