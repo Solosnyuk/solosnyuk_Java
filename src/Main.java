@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Main {
     public static String solve(final String str) {
@@ -22,9 +23,12 @@ public class Main {
         return arrMinMax;
     }
 
-    public static int twiceAsOld(int dadYears, int sonYears) {
-        //TODO: Add code here
-        return 0;
+    public String[] mergeTwo(String[] a, String[] b, int n) {
+        return Stream.concat(Arrays.stream(a),Arrays.stream(b))
+                .distinct()
+                .sorted()
+                .limit(3)
+                .toArray(String[]::new);
     }
 
     public static void main(String[] args) {
