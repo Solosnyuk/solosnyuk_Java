@@ -1,32 +1,34 @@
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
-    public static String withoutString(String base, String remove) {
-        return base.replaceAll("(?i)" + remove, "");
-    }
+    public static String solve(final String str) {
+        int countLow = 0;
+        int countUp = 0;
 
-    public boolean gHappy(String str) {
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == 'g') {
-                boolean leftHappy = (i > 0) && (str.charAt(i - 1) == 'g');
-                boolean rightHappy = (i < str.length() - 1) && (str.charAt(i + 1) == 'g');
-
-                if (!leftHappy && !rightHappy) {
-                    return false;
-                }
+            if (Character.isUpperCase(str.charAt(i))){
+                countUp++;
+            }else{
+                countLow++;
             }
         }
-        return true;
+        return (countLow >= countUp)? str.toLowerCase() : str.toUpperCase();
     }
 
-    public String notReplace(String str) {
-        return str.replaceAll("(?<![a-zA-Z])is(?![a-zA-Z])", "is not");
+    public static int[] minMax(int[] arr) {
+        int[] arrMinMax = new int[2];
+        arrMinMax[0] = Arrays.stream(arr).min().getAsInt();
+        arrMinMax[1] = Arrays.stream(arr).max().orElse(1);
+        return arrMinMax;
+    }
+
+    public static int twiceAsOld(int dadYears, int sonYears) {
+        //TODO: Add code here
+        return 0;
     }
 
     public static void main(String[] args) {
-        System.out.println(withoutString("Hello there", "llo"));
+        System.out.println(Arrays.toString(minMax(new int[]{1,2,3,4})));
     }
 }
 
