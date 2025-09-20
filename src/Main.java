@@ -31,6 +31,17 @@ public class Main {
                 .toArray(String[]::new);
     }
 
+    public boolean makeBricks(int small, int big, int goal) {
+        int maxBigLength = Math.min(big, goal / 5) * 5;
+
+        // Оставшуюся длину должны покрыть маленькие кирпичи
+        int remaining = goal - maxBigLength;
+
+        // Проверяем, хватает ли маленьких кирпичей
+        return remaining <= small;
+    }
+
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(minMax(new int[]{1,2,3,4})));
     }
