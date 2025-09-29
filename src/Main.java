@@ -45,5 +45,30 @@ public class Main {
             }
         }
     }
+
+    public int noTeenSum(int a, int b, int c) {
+        return fixTeen(a) + fixTeen(b) + fixTeen(c);
+    }
+
+    public int fixTeen(int n){
+        if (n == 13 || n == 14 || n == 17 || n == 18 || n ==19){
+            return 0;
+        }else {
+            return n;
+        }
+    }
+
+    public boolean closeFar(int a, int b, int c) {
+        if (Math.abs(a - c) <= 1 || Math.abs(a - b) <= 1){
+            if (Math.abs(a - c) >= 2 || Math.abs(a - b) >= 2){
+                return true;
+            }else{
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
 }
 
