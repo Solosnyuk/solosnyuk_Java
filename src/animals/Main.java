@@ -17,6 +17,8 @@ public class Main {
         );
 
         for (Animals animals : animalsList) {
+            if (animals instanceof Meet){
+            }
         }
 
 
