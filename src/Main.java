@@ -1,54 +1,86 @@
+import java.math.BigInteger;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
-    public static int getCount(String str) {
-        int lengStr = str.length();
-        int newLength = str.toLowerCase().replaceAll("[aeiou]","").length();
-        return lengStr - newLength;
-    }
+    public static String pigIt(String str) {
+        String[] arrStr = str.split(" ");
+        List<String> result = new ArrayList<>();
 
-    public static String disemvowel(String str) {
-        return str.replaceAll("(?i)[aeiou]", "");
-    }
-
-    public static int solution(int number) {
-        int sum = 0;
-        for (int i = number - 1; i > 0; i--) {
-            if (i % 3 == 0 || i % 5 == 0){
-                sum += i;
+        for (String word : arrStr) {
+            if (word.matches("\\p{Punct}")) {
+                result.add(word);
+            } else {
+                String pigWord = word.substring(1) + word.charAt(0) + "ay";
+                result.add(pigWord);
             }
         }
-        return sum;
+        return String.join(" ",result);
     }
 
-    public static int[] arrayDiff(int[] a, int[] b) {
-        List<Integer> integerList = Arrays.stream(a).boxed().collect(Collectors.toList());
-        List<Integer> listB = Arrays.stream(b).boxed().collect(Collectors.toList());
+    public static String rot13(String str) {
+        String[] strings = str.split(" ");
+        List<String> stringList = new ArrayList<>();
 
-        integerList.removeAll(listB);
+        for (String string : strings) {
+            if (string.matches("\\p{Punct}") || string.matches("\\p{XDigit}")){
+                stringList.add(string);
+            }else{
+                char[] characters = string.toCharArray();
+                StringBuilder stringBuilder = new StringBuilder();
 
-        return integerList.stream().mapToInt(e -> e).toArray();
-    }
-
-    public String spinWords(String sentence) {
-        String[] words = sentence.split(" ");
-        List<String> res = new ArrayList<>();
-
-        for (String word : words) {
-            if (word.length() >= 5){
-                res.add(new StringBuilder(word).reverse().toString());
-            }
-            else {
-                res.add(word);
+                for (char character : characters) {
+                    stringBuilder.append(shiftLetter(character));
+                }
+                stringList.add(stringBuilder.toString());
             }
         }
-        return String.join(" ", res);
+        return String.join(" ",stringList);
     }
+
+    public static char shiftLetter(char c) {
+        if (Character.isUpperCase(c)) {
+            return (char) ('A' + (c - 'A' + 13) % 26);
+        } else if (Character.isLowerCase(c)) {
+            return (char) ('a' + (c - 'a' + 13) % 26);
+        } else {
+            return c; // не буква — не меняем
+        }
+    }
+
+    public static String incrementString(String str) {
+        int index = -1;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.isDigit(str.charAt(i))){
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1){
+            return str + "1";
+        }
+
+        String word = str.substring(0,index);
+        String digi = str.substring(index);
+
+        return word + ivNull(digi);
+    }
+
+    public static String ivNull(String num) {
+        int originalLength = num.length();
+        BigInteger numericValue = new BigInteger(num).add(BigInteger.ONE);
+        String incremented = numericValue.toString();
+
+        int zerosToAdd = originalLength - incremented.length();
+        if (zerosToAdd < 0) zerosToAdd = 0;
+
+        return "0".repeat(zerosToAdd) + incremented;
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(solution(10));
-
+        System.out.println(incrementString("foobar000"));
 
         List<Model> modelList = new ArrayList<>(
                 Arrays.asList(
