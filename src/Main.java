@@ -2,86 +2,50 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
-    public static String pigIt(String str) {
-        String[] arrStr = str.split(" ");
-        List<String> result = new ArrayList<>();
-
-        for (String word : arrStr) {
-            if (word.matches("\\p{Punct}")) {
-                result.add(word);
-            } else {
-                String pigWord = word.substring(1) + word.charAt(0) + "ay";
-                result.add(pigWord);
+    public static String firstNonRepeatingLetter(String s){
+        String[] charArr = s.split("");
+        for (String string : charArr) {
+            String revS = s.toLowerCase().replaceAll(string.toLowerCase(), "");
+            if (s.length() == revS.length() + 1){
+                return string;
             }
         }
-        return String.join(" ",result);
+        return "";
     }
 
-    public static String rot13(String str) {
-        String[] strings = str.split(" ");
-        List<String> stringList = new ArrayList<>();
+    public static int sequence(int[] arr) {
+        int maxSum = 0;
+        int currentSum = 0;
 
-        for (String string : strings) {
-            if (string.matches("\\p{Punct}") || string.matches("\\p{XDigit}")){
-                stringList.add(string);
-            }else{
-                char[] characters = string.toCharArray();
-                StringBuilder stringBuilder = new StringBuilder();
-
-                for (char character : characters) {
-                    stringBuilder.append(shiftLetter(character));
-                }
-                stringList.add(stringBuilder.toString());
-            }
-        }
-        return String.join(" ",stringList);
-    }
-
-    public static char shiftLetter(char c) {
-        if (Character.isUpperCase(c)) {
-            return (char) ('A' + (c - 'A' + 13) % 26);
-        } else if (Character.isLowerCase(c)) {
-            return (char) ('a' + (c - 'a' + 13) % 26);
-        } else {
-            return c; // не буква — не меняем
-        }
-    }
-
-    public static String incrementString(String str) {
-        int index = -1;
-
-        for (int i = 0; i < str.length(); i++) {
-            if (Character.isDigit(str.charAt(i))){
-                index = i;
-                break;
-            }
+        for (int num : arr) {
+            currentSum = Math.max(0, currentSum + num);
+            maxSum = Math.max(maxSum, currentSum);
         }
 
-        if (index == -1){
-            return str + "1";
-        }
-
-        String word = str.substring(0,index);
-        String digi = str.substring(index);
-
-        return word + ivNull(digi);
+        return maxSum;
     }
 
-    public static String ivNull(String num) {
-        int originalLength = num.length();
-        BigInteger numericValue = new BigInteger(num).add(BigInteger.ONE);
-        String incremented = numericValue.toString();
-
-        int zerosToAdd = originalLength - incremented.length();
-        if (zerosToAdd < 0) zerosToAdd = 0;
-
-        return "0".repeat(zerosToAdd) + incremented;
+    public static int cakes(Map<String, Integer> recipe, Map<String, Integer> available) {
+        return recipe.entrySet().stream()
+                .mapToInt(n -> available.getOrDefault(n,0)/recipe.get(n))
+                .min()
+                .orElse(0);
     }
 
+    public static Map<String,List<Integer>> getPeaks(int[] arr) {
+        Map<String , List<Integer>> pos = new HashMap<>();
 
+        return null;
+    }
+
+    public static String makeReadable(int seconds) {
+
+
+        return Integer.toString(seconds);
+    }
+    
     public static void main(String[] args) {
-        System.out.println(incrementString("foobar000"));
-
+        System.out.println(makeReadable(86399));
         List<Model> modelList = new ArrayList<>(
                 Arrays.asList(
                         new Model(10),
