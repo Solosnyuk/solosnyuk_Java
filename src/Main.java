@@ -1,51 +1,40 @@
 import java.math.BigInteger;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
-    public static String firstNonRepeatingLetter(String s){
-        String[] charArr = s.split("");
-        for (String string : charArr) {
-            String revS = s.toLowerCase().replaceAll(string.toLowerCase(), "");
-            if (s.length() == revS.length() + 1){
-                return string;
+    public static int[] deleteNth(int[] elements, int maxOccurrences) {
+        List<Integer> integerList = new ArrayList<>();
+        Map<Integer, Integer> integerIntegerMap = new HashMap<>();
+
+        for (int num : elements) {
+            integerIntegerMap.put(num,integerIntegerMap.getOrDefault(num,0) + 1);
+            if (maxOccurrences >= integerIntegerMap.get(num)){
+                integerList.add(num);
             }
         }
-        return "";
+
+        return integerList.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public static int sequence(int[] arr) {
-        int maxSum = 0;
-        int currentSum = 0;
+    public static int[] removeSmallest(int[] numbers) {
+        int minIndex = Arrays.stream(numbers).min().getAsInt();
 
-        for (int num : arr) {
-            currentSum = Math.max(0, currentSum + num);
-            maxSum = Math.max(maxSum, currentSum);
-        }
-
-        return maxSum;
+        return IntStream.range(0, numbers.length)
+                .filter(i -> i != minIndex)
+                .map(i -> numbers[i])
+                .toArray();
     }
 
-    public static int cakes(Map<String, Integer> recipe, Map<String, Integer> available) {
-        return recipe.entrySet().stream()
-                .mapToInt(n -> available.getOrDefault(n,0)/recipe.get(n))
-                .min()
-                .orElse(0);
+    public static int findAverage(int[] nums) {
+        int sum = Arrays.stream(nums).sum();
+        return sum / nums.length;
     }
 
-    public static Map<String,List<Integer>> getPeaks(int[] arr) {
-        Map<String , List<Integer>> pos = new HashMap<>();
-
-        return null;
-    }
-
-    public static String makeReadable(int seconds) {
-
-
-        return Integer.toString(seconds);
-    }
-    
     public static void main(String[] args) {
-        System.out.println(makeReadable(86399));
+        System.out.println(Arrays.toString(removeSmallest(new  int[]{2, 3, 4, 5})));
+
         List<Model> modelList = new ArrayList<>(
                 Arrays.asList(
                         new Model(10),
