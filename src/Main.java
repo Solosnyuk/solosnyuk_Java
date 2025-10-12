@@ -1,7 +1,6 @@
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -55,7 +54,66 @@ public class Main {
         people.stream()
                 .mapToInt(person -> person.age)
                 .average()
-                .ifPresent (value -> System.out.println(value));
+                .ifPresent(value -> System.out.println(value));
     }
 
-}
+    public int evenNumCount(List<Integer> list) {
+        return (int) list.stream()
+                .filter(n -> n % 2 == 0)
+                .count();
+    }
+
+    public String[] stringsToUpper(String[] strings) {
+        return Stream.of(strings)
+                .filter(num -> num.length() > 5)
+                .map(String::toUpperCase)
+                .sorted()
+                .toArray(String[]::new);
+    }
+
+    public int number4(int[] ints) {
+        return Arrays.stream(ints)
+                .map(n -> n * n)
+                .sum();
+    }
+
+    public List<Integer> deleteDuplicate(List<Integer> list) {
+        return list.stream()
+                .sorted()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public void sort(List<String> list) {
+        list.stream()
+                .filter(word -> word.charAt(0) == 'C')
+                .map(String::toLowerCase)
+                .forEach(System.out::println);
+    }
+
+    public Integer sortBock(Map<String, Integer> map) {
+        return map.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getValue)
+                .orElse(0);
+    }
+
+    public String sortName(Map<String, Integer> map) {
+        return map.entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .toString();
+    }
+
+    public Map<String, Integer> student(Map<String, Integer> map) {
+        return map.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 80)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue));
+    }
+
+
+    }
