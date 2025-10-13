@@ -91,29 +91,59 @@ public class Main {
                 .forEach(System.out::println);
     }
 
-    public Integer sortBock(Map<String, Integer> map) {
-        return map.entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getValue)
+    public int average(Map<String, Integer> map) {
+        return (int) map.entrySet().stream()
+                .mapToInt(m -> m.getValue())
+                .average()
                 .orElse(0);
     }
 
-    public String sortName(Map<String, Integer> map) {
-        return map.entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
-                .toString();
-    }
+    public Map<String, Integer> maxMap(Map<String, Integer> map) {
+        int max = map.values().stream().max(Integer::compare).orElse(0);
 
-    public Map<String, Integer> student(Map<String, Integer> map) {
-        return map.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() > 80)
+        return map.entrySet().stream()
+                .filter(entry -> entry.getValue() == max)
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        Map.Entry::getValue));
+                        Map.Entry::getValue)
+                );
     }
 
-
+    public Map<String, Integer> addThenProcent(Map<String, Integer> map) {
+        return map.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> (int) (entry.getValue() * 1.1)));
     }
+
+    public int maxInteger(List<Integer> list) {
+        return list.stream()
+                .max(Integer::compare)
+                .orElse(0);
+    }
+
+    public List<Integer> evelInteger(List<Integer> list) {
+        return list.stream()
+                .filter(n -> n % 2 == 0)
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> length(List<String> list) {
+        return list.stream()
+                .map(String::length)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> removeDuplicate(List<String> list) {
+        return list.stream()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public String firstA(List<String> list) {
+        return list.stream()
+                .filter(word -> word.startsWith("A"))
+                .findFirst()
+                .orElse("Не найдено");
+    }
+}
