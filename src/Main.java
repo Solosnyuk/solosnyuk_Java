@@ -7,143 +7,51 @@ public class Main {
 
     }
 
-    public List<Integer> noNeg(List<Integer> nums) {
-        return nums.stream()
-                .filter(n -> n > 0)
-                .collect(Collectors.toList());
+    public String maxValue(Map<String, Integer> map) {
+        int max = 0;
+        String keyMax = "";
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                keyMax = entry.getKey();
+            }
+        }
+        return keyMax;
     }
 
-    public List<Integer> no9(List<Integer> nums) {
-        return nums.stream()
-                .filter(n -> n % 10 != 9)
-                .collect(Collectors.toList());
+    public Map<String, Integer> deletNull(Map<String, Integer> map) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == null) {
+                map.remove(entry.getKey());
+            }
+        }
+        return map;
     }
 
-    public List<Integer> noTeen(List<Integer> nums) {
-        return nums.stream()
-                .filter(n -> n > 19 || n < 13)
-                .collect(Collectors.toList());
+    public Integer sumAllValue(Map<String, Integer> map) {
+        Integer summ = 0;
+
+        for (Integer integer : map.values()) {
+            summ += integer;
+        }
+        return summ;
     }
 
-    public List<String> noZ(List<String> strings) {
-        return strings.stream()
-                .filter(word -> !word.contains("z"))
-                .collect(Collectors.toList());
+    public List<String> searchAllKeyB(Map<String, Integer> map) {
+        List<String> list = new ArrayList<>();
+        for (String string : map.keySet()) {
+            if (string.startsWith("B")) {
+                list.add(string);
+            }
+        }
+        return list;
     }
 
-    public void allEven(List<Integer> list) {
-        list.stream()
-                .filter(num -> num % 2 == 0)
-                .forEach(System.out::println);
-    }
-
-    public void hi18(List<Person> people) {
-        people.stream()
-                .filter(person -> person.age > 18)
-                .forEach(System.out::println);
-    }
-
-    public void maxOld(List<Person> people) {
-        people.stream()
-                .max(Comparator.comparingInt(person -> person.age))
-                .ifPresent(System.out::println);
-
-    }
-
-    public void sredniy(List<Person> people) {
-        people.stream()
-                .mapToInt(person -> person.age)
-                .average()
-                .ifPresent(value -> System.out.println(value));
-    }
-
-    public int evenNumCount(List<Integer> list) {
-        return (int) list.stream()
-                .filter(n -> n % 2 == 0)
-                .count();
-    }
-
-    public String[] stringsToUpper(String[] strings) {
-        return Stream.of(strings)
-                .filter(num -> num.length() > 5)
-                .map(String::toUpperCase)
-                .sorted()
-                .toArray(String[]::new);
-    }
-
-    public int number4(int[] ints) {
-        return Arrays.stream(ints)
-                .map(n -> n * n)
-                .sum();
-    }
-
-    public List<Integer> deleteDuplicate(List<Integer> list) {
-        return list.stream()
-                .sorted()
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    public void sort(List<String> list) {
-        list.stream()
-                .filter(word -> word.charAt(0) == 'C')
-                .map(String::toLowerCase)
-                .forEach(System.out::println);
-    }
-
-    public int average(Map<String, Integer> map) {
-        return (int) map.entrySet().stream()
-                .mapToInt(m -> m.getValue())
-                .average()
-                .orElse(0);
-    }
-
-    public Map<String, Integer> maxMap(Map<String, Integer> map) {
-        int max = map.values().stream().max(Integer::compare).orElse(0);
-
-        return map.entrySet().stream()
-                .filter(entry -> entry.getValue() == max)
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue)
-                );
-    }
-
-    public Map<String, Integer> addThenProcent(Map<String, Integer> map) {
-        return map.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> (int) (entry.getValue() * 1.1)));
-    }
-
-    public int maxInteger(List<Integer> list) {
-        return list.stream()
-                .max(Integer::compare)
-                .orElse(0);
-    }
-
-    public List<Integer> evelInteger(List<Integer> list) {
-        return list.stream()
-                .filter(n -> n % 2 == 0)
-                .collect(Collectors.toList());
-    }
-
-    public List<Integer> length(List<String> list) {
-        return list.stream()
-                .map(String::length)
-                .collect(Collectors.toList());
-    }
-
-    public List<String> removeDuplicate(List<String> list) {
-        return list.stream()
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    public String firstA(List<String> list) {
-        return list.stream()
-                .filter(word -> word.startsWith("A"))
-                .findFirst()
-                .orElse("Не найдено");
+    public Map<String, Integer> addFive(Map<String, Integer> map) {
+        for (Integer value : map.values()) {
+            value = value + 5;
+        }
+        return map;
     }
 }
