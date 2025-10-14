@@ -8,6 +8,7 @@ public class Student extends Person {
 
     @Override
     public void getInfo() {
-        System.out.println("Информация из Student");
+        System.out.println("Информация о студенте: " + "\n" + "Имя: " + this.name +
+                "\n" + "Факультет: " + this.fakultet);
     }
 }
