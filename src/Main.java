@@ -1,79 +1,68 @@
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
+
     }
 
-    public static Map<String, Integer> povtor(String str) {
-        Map<String, Integer> res = new HashMap<>();
-        String[] arrStr = str.split("[ _,.]");
-
-        for (String string : arrStr) {
-            res.put(string, res.getOrDefault(string, 0) + 1);
-        }
-
-        return res;
+    public static String reversString(String string) {
+        return new StringBuilder(string).reverse().toString();
     }
 
-    public static List<String> deletDuplicate(List<String> list) {
-        return list.stream()
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    public static List<User> sortAge(List<User> list) {
-        return list.stream()
-                .sorted(Comparator.comparingInt(User::getAge))
-                .collect(Collectors.toList());
-    }
-
-    public static String revers(String string) {
-        String[] arr = string.split(" ");
-        List<String> list = Arrays.asList(arr);
-        Collections.reverse(list);
-        return String.join(" ", list);
+    public static Boolean palindromChek(String string) {
+        String reversStr = new StringBuilder(string).reverse().toString();
+        return string.equals(reversStr);
     }
 
     public static BigInteger factorial(int n) {
-        return factorial(n - 1);
+        return BigInteger.valueOf(n).multiply(factorial(n - 1));
     }
 
-    public static Map<String, Integer> searchDuplicate(List<String> list) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String string : list) {
-            map.put(string, map.getOrDefault(string, 0) + 1);
-        }
-        return map;
+    public static Integer searchTwoMax(int[] arr) {
+        return Arrays.stream(arr)
+                .max()
+                .getAsInt();
     }
 
     public static List<String> removeDuplicate(List<String> list) {
         return list.stream().distinct().collect(Collectors.toList());
     }
 
-    public static boolean anagram(String string, String silent) {
-        if (string.length() != silent.length()) {
-            return false;
+    public static void fizzBuzz(int n) {
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0) {
+                System.out.println("Fizz");
+            } else if (i % 5 == 0) {
+                System.out.println("Buzz");
+            } else if (i % 3 == 0 && i % 5 == 0) {
+                System.out.println("FizzBuzz");
+            }
+        }
+    }
+
+    public static boolean anagramCheck(String one, String two) {
+        char[] chars = one.toCharArray();
+        char[] chars2 = two.toCharArray();
+
+        Arrays.sort(chars);
+        Arrays.sort(chars2);
+
+        return Arrays.equals(chars, chars2);
+    }
+
+    public static Map<Character, Integer> sortChar(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0) +1);
         }
 
-        char[] chars = string.toCharArray();
-        char[] chars2 = silent.toCharArray();
-
-        return Arrays.equals(chars,chars2);
+        return map;
     }
 
-    public static String searchMaxLengthWord(String string) {
-        String[] strings = string.split(" ");
 
-        return Arrays.stream(strings)
-                .max(Comparator.comparingInt(String::length))
-                .orElse("");
-    }
-
-    public static List<String> sortList(List<String> list) {
-        return list.stream()
-                .sorted(Comparator.comparingInt(String::length))
-                .collect(Collectors.toList());
-    }
+    
 }
