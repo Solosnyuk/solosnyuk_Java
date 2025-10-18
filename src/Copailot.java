@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-public class copailot {
+public class Copailot {
     public static char searchUniq(String string) {
         for (int i = 0; i < string.length(); i++) {
             char ch = string.charAt(i);
