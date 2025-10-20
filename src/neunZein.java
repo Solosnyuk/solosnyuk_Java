@@ -19,7 +19,6 @@ public class neunZein {
     }
 
     public static Map<Integer, List<String>> group(List<String> list) {
-        Map<Integer, List<String>> map = new HashMap<>();
         return list.stream()
                 .collect(Collectors.groupingBy(String::length));
     }
