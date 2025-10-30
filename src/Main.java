@@ -1,13 +1,14 @@
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.temporal.ValueRange;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> list = Arrays.asList("Первый", "второй", "Третий");
-
+        List<String> list = Arrays.asList("ii", "i", "iiiiiiiiiiiii");
+        System.out.println(sortGlasnii(list));
 
     }
 
@@ -68,5 +69,36 @@ public class Main {
                         Function.identity(),
                         Collectors.counting()
                 ));
+    }
+
+    public static List<Integer> bolleeOdnogo(List<Integer> list) {
+        Map<Integer, Long> map = list.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ));
+        List<Integer> list1 = new ArrayList<>();
+
+        for (Map.Entry<Integer, Long> entry : map.entrySet()) {
+            if (entry.getValue() > 1) {
+                list1.add(entry.getKey());
+            }
+        }
+        return list;
+    }
+
+    public static List<String> sortGlasnii(List<String> list) {
+        Map<String, Long> map = new LinkedHashMap<>();
+
+        for (String string : list) {
+            Long raz = Arrays.asList(string.toLowerCase().toCharArray()).stream()
+                    .filter(w -> w.equals("[aiuoe]"))
+                    .count();
+            map.put(string, raz);
+        }
+        return map.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .toList();
     }
 }
