@@ -101,4 +101,24 @@ public class Main {
                 .map(Map.Entry::getKey)
                 .toList();
     }
+
+    public static List<String> sortEmployee(List<Employee> list) {
+        return list.stream()
+                .filter(employee -> employee.getAge > 30 && "Developer".equals(employee.getStatus))
+                .map(Employe::getName)
+                .collect(Collectors.toList());
+    }
+
+    public static Integer countUniq(String string) {
+        return Arrays.stream(string.split(" "))
+                .map(word -> word.toLowerCase().replaceAll("[,./')(]", ""))
+                .map(word -> !word.isEmpty())
+                .collect(Collectors.toSet())
+                .size();
+    }
+
+    public static Map<Status, List<Order>> mapOrder(List<Order> list) {
+        return list.stream()
+                .collect(Collectors.groupingBy(Order::getStatus));
+    }
 }
