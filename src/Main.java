@@ -1,3 +1,4 @@
+import javax.swing.plaf.PanelUI;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.temporal.ValueRange;
@@ -56,4 +57,28 @@ public class Main {
                 .findFirst()
                 .orElse(null);
     }
+
+    public static List<String> filtrList(List<String> list) {
+        return list.stream()
+                .filter(word -> word.matches("[123456789]"))
+                .map(word -> word.toUpperCase())
+                .toList();
+    }
+
+    public static Map<String, Integer> groupEmployee(List<Employee> list) {
+        return list.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::getStatus,
+                        Collectors.averagingInt(
+                        Employee::getSalary)
+                ));
+    }
+
+    public static Map<String, Integer> preobrMap(List<String> list) {
+        return list.stream()
+                .collect(Collectors.toMap(
+                        word -> word,
+                        String::length));
+    }
+
 }
