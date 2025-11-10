@@ -1,84 +1,69 @@
-import javax.swing.plaf.PanelUI;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.temporal.ValueRange;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
 
     }
+    public static Integer maxInt(int[] arr) {
+        return Arrays.stream(arr)
+                .max()
+                .getAsInt();
+    }
 
-    public static List<String> filtrList(List<String> list) {
-        return list.stream()
-                .filter(word -> word.length() < 5)
-                .map(word -> word.toUpperCase())
+    public static boolean palindromCheck(String s, String sTwo) {
+        return sTwo.equals(new StringBuilder(s).reverse());
+    }
+
+    public static int[] reverArr(int[] arr) {
+        return IntStream.range(0, arr.length)
+                .map(i -> arr[arr.length - 1 - i])
+                .toArray();
+    }
+
+    public static List<Integer> povtorList(List<Integer> list) {
+        HashSet<Integer> hashSet = new HashSet<>();
+        HashSet<Integer> duplicate = new HashSet<>();
+
+        for (Integer i : list) {
+            if (!hashSet.add(i)) {
+                duplicate.add(i);
+            }
+        }
+        return duplicate.stream()
                 .toList();
     }
 
-    public static Map<String, List<String>> groupEmployee(List<String> list) {
-        list.stream()
-                .collect(Collectors.groupingBy(
-                       list::getOtdel
-                ));
+    public static List<Integer> distDup(List<Integer> list) {
+        return list.stream().distinct().toList();
     }
 
-    public static Employee maxSalary(List<Employee> list) {
+    public static boolean easyNum(Integer intege) {
+        int countNum = 0;
+        for (int i = 2; i < intege / 2; i++) {
+            if (intege % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static Integer countGlasnaya(String list) {
+        return (int) list.chars()
+                .mapToObj(c -> (char) c)
+                .filter(c -> "aeiouAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ".indexOf(c) != -1)
+                .count();
+    }
+
+    public static Integer twoMaxNum(List<Integer> list) {
         return list.stream()
-                .max(Comparator.comparingInt(Employee::getSalary))
+                .sorted(Comparator.reverseOrder())
+                .distinct() // если нужно второе уникальное максимальное
+                .skip(1)
+                .findFirst()
                 .orElseThrow();
     }
-
-    public static Integer avgInt(int[] ints) {
-        return (int) Arrays.stream(ints)
-                .average()
-                .orElse(0);
-    }
-
-    public static boolean checkUpper(List<String> list) {
-        return list.stream()
-                .allMatch(word -> Character.isUpperCase(word.charAt(0)));
-    }
-
-    public static List<Integer> sort(List<Integer> list) {
-        return list.stream()
-                .distinct()
-                .sorted(Comparator.reverseOrder()                )
-                .toList();
-    }
-
-    public static String firstMath(List<String> list, String s) {
-        return list.stream()
-                .filter(word -> word.contains(s))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public static List<String> filtrList(List<String> list) {
-        return list.stream()
-                .filter(word -> word.matches("[123456789]"))
-                .map(word -> word.toUpperCase())
-                .toList();
-    }
-
-    public static Map<String, Integer> groupEmployee(List<Employee> list) {
-        return list.stream()
-                .collect(Collectors.groupingBy(
-                        Employee::getStatus,
-                        Collectors.averagingInt(
-                        Employee::getSalary)
-                ));
-    }
-
-    public static Map<String, Integer> preobrMap(List<String> list) {
-        return list.stream()
-                .collect(Collectors.toMap(
-                        word -> word,
-                        String::length));
-    }
-
 }
