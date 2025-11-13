@@ -4,11 +4,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ListAnalyst {
-    public static Map<String, Long> groupPassedList(List<TestCase> list) {
+    public static Map<String, Long> groupPassedList(List<String> list) {
         return list.stream()
                 .collect(
                         Collectors.groupingBy(
-                                testCase -> testCase.getStatus,
+                                String -> String,
                                 Collectors.counting()
                         )
                 );
