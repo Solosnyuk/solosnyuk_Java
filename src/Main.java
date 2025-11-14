@@ -1,61 +1,45 @@
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-
+        List<Integer> integerList = Arrays.asList(1,2,3,4,5,1,2);
+        System.out.println(uniqInt(integerList));
     }
 
-    public static List<String> uniqStrig(List<String> strings) {
-        return strings.stream()
-                .distinct()
+    public static Map<String, Long> countWord(List<String> wordList) {
+        return wordList.stream()
+                .collect(Collectors.groupingBy(
+                        word -> word,
+                        Collectors.counting()
+                ));
+    }
+
+    public static List<String> sortLegth(List<String> list) {
+        return  list.stream()
                 .sorted(Comparator.comparingInt(String::length))
-                .toList();
+                .collect(Collectors.toList());
     }
 
-    public static Map<Integer, Long> mapCount(List<Integer> integerList) {
-        return integerList.stream()
+    public static Map<Character, List<String>> groupChar(List<String> wordList) {
+        return wordList.stream()
                 .collect(Collectors.groupingBy(
-                        Function.identity(),
-                        Collectors.summingLong(e -> 1)
+                    word -> word.charAt(0)
                 ));
     }
 
-    public static Integer avgSalary(List<Employee> employeeList) {
-        return (int) employeeList.stream()
-                .filter(employee -> employee.getAge() > 30)
-                .mapToDouble(Employee::getSalary)
-                .average()
-                .orElse(0);
-    }
+    public static List<Integer> uniqInt(List<Integer> list) {
+        List<Integer> listUniq = new ArrayList<>();
+        Map<Integer, List<Integer>> mapCount = list.stream().
+                collect(Collectors.groupingBy(
+                        inter -> inter
+                ));
 
-    public static Map<String, Integer> countMap(Map<String, Integer> map, Map<String, Integer> integerMap) {
-        for (Map.Entry<String, Integer> entry : integerMap.entrySet()) {
-            map.merge(entry.getKey(), entry.getValue(), Integer::sum);
+        for (Map.Entry<Integer, List<Integer>> entry : mapCount.entrySet()) {
+            if (entry.getKey() == 1){
+                return entry.getValue();
+            }
         }
-
-        return map;
+        return null;
     }
-
-    public static List<Product> priceLow(List<Product> list) {
-        return list.stream()
-                .filter(product -> product.getPrice() < 100)
-                .toList();
-    }
-
-    public static Map<Character, List<String>> groupChar(List<String> list) {
-        return list.stream()
-                .collect(Collectors.groupingBy(
-                        string -> string.charAt(0)
-                ));
-    }
-
-    public static Integer maxInt(int[] arr) {
-        return Arrays.stream(arr)
-                .max()
-                .getAsInt();
-    }
-
-
 }
