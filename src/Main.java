@@ -1,45 +1,36 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> integerList = Arrays.asList(1,2,3,4,5,1,2);
-        System.out.println(uniqInt(integerList));
-    }
+        ArrayList<Integer> listInt = new ArrayList<>();
+        long start = System.currentTimeMillis();
 
-    public static Map<String, Long> countWord(List<String> wordList) {
-        return wordList.stream()
-                .collect(Collectors.groupingBy(
-                        word -> word,
-                        Collectors.counting()
-                ));
-    }
-
-    public static List<String> sortLegth(List<String> list) {
-        return  list.stream()
-                .sorted(Comparator.comparingInt(String::length))
-                .collect(Collectors.toList());
-    }
-
-    public static Map<Character, List<String>> groupChar(List<String> wordList) {
-        return wordList.stream()
-                .collect(Collectors.groupingBy(
-                    word -> word.charAt(0)
-                ));
-    }
-
-    public static List<Integer> uniqInt(List<Integer> list) {
-        List<Integer> listUniq = new ArrayList<>();
-        Map<Integer, List<Integer>> mapCount = list.stream().
-                collect(Collectors.groupingBy(
-                        inter -> inter
-                ));
-
-        for (Map.Entry<Integer, List<Integer>> entry : mapCount.entrySet()) {
-            if (entry.getKey() == 1){
-                return entry.getValue();
-            }
+        for (int i = 0; i < 5_000; i++) {
+            listInt.add(0,i);
         }
-        return null;
+        System.out.println(System.currentTimeMillis() - start);
+
+        LinkedList<Integer> linkInt = new LinkedList<>();
+        long statrLink = System.currentTimeMillis();
+
+        for (int i = 0; i < 5_000; i++) {
+            linkInt.addFirst(i);
+        }
+        System.out.println(System.currentTimeMillis() - statrLink);
     }
+
+    public static void benchmark(List list) {
+        Date curencyTime = new Date();
+        addList(list);
+        Date newTime = new Date();
+        long msDelay = newTime.getTime() - curencyTime.getTime();
+        System.out.println("Результат в мс " + msDelay);
+    }
+
+    public static void addList(List list) {
+        for (int i = 0; i < 1_000_000_000; i++) {
+            list.add(i);
+        }
+    }
+
 }
