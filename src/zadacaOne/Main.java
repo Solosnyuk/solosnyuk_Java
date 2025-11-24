@@ -11,6 +11,7 @@ public class Main {
     public static Client findHigAgeClient(List<Client> clientList) {
         return clientList.stream()
                 .filter(
+
                         c -> c.getPhoneList().stream()
                                 .anyMatch(
                                         p -> p.getPhoneType() == PhoneType.STATIONARY
