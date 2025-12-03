@@ -1,9 +1,6 @@
 package zadacaOne;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -33,9 +30,36 @@ public class Main {
     public static Map<String, Integer> countWord(String word) {
         return Arrays.stream(word.split(" "))
                 .collect(Collectors.groupingBy(
-                        wrd -> wrd,
-                        Collectors.summingInt(w -> 1)
+                                wrd -> wrd,
+                                Collectors.summingInt(w -> 1)
                         )
                 );
+    }
+
+    public static List<User> sortUserAge(List<User> list, Integer age) {
+        return list.stream()
+                .filter(u -> u.getAge() > age)
+                .toList();
+    }
+
+    public static List<Integer> nameToLengh(List<String> stringList) {
+        return stringList.stream()
+                .map(w -> w.length())
+                .toList();
+    }
+
+    public static Map<Group, Integer> countGroup(List<User> userList) {
+        return userList.stream()
+                .collect(Collectors.groupingBy(
+                                User::getGroup,
+                                Collectors.summingInt(w -> 1)
+                        )
+                );
+    }
+
+    public static List<Product> lastCost(List<Product> productList, Integer cost) {
+        return productList.stream()
+                .filter(product -> product.getCost() > cost)
+                .toList();
     }
 }
