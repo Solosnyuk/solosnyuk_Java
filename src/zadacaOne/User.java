@@ -22,4 +22,16 @@ public class User {
     public Group getGroup() {
         return group;
     }
+
+    public static void setName(String name) {
+        User.name = name;
+    }
+
+    public static void setAge(Integer age) {
+        User.age = age;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 }
