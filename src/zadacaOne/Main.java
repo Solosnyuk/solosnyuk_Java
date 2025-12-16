@@ -1,6 +1,7 @@
 package zadacaOne;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -30,15 +31,29 @@ public class Main {
                 .count());
     }
 
-    public static List<Student> sortGrade(List<Student> studentList) {
-        return studentList.stream()
-                .sorted(Comparator.comparingDouble(
-                        student -> student.getGrade().stream()
-                                .mapToInt(Integer::intValue)
-                                .average()
-                                .orElse(0)
-                ).reversed()) // если нужно от большего к меньшему
+    public static List<String> getTopNFrequentWords(List<String> words, int n) {
+        return words.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ))
+                .entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                .limit(n)
+                .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
 
+    public static Map<String, List<Product>> getProductsByCategory(List<Order> orders) {
+        return orders.stream()
+                .flatMap(order -> order.products().stream())
+                .collect(Collectors.groupingBy(Product::category));
+    }
+
+    public static Map<Integer, List<Integer>> groupByDigitSum(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(
+                        NumberProcessor::sumOfDigits
+                ));
+    }
 }
