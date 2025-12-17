@@ -7,13 +7,22 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
 
-        MyThread thread1 = new MyThread(1);
-        MyThread thread2 = new MyThread(2);
-        thread1.start();
-        thread2.start();
+        for (int i = 0; i < 5; i++) {
+            var runnable = new MyThread(i);
+            var thread = new Thread(() -> {
+                System.out.println("hello");
+            });
+            thread.start();
+
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
-    public static Map<String,List<Employee>> sortEmployee(List<Employee> employeeList) {
+    public static Map<String, List<Employee>> sortEmployee(List<Employee> employeeList) {
         return employeeList.stream()
                 .collect(Collectors.groupingBy(
                         employee -> employee.getDepartament()
@@ -46,5 +55,42 @@ public class Main {
                 .limit(n)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+    }
+
+    public static Map<String, List<Employee>> groupDepartament(List<Employee> employeeList) {
+        return employeeList.stream()
+                .collect(Collectors.groupingBy(
+                                Employee::getDepartament
+                        )
+                );
+    }
+
+    public static Product maxCostProduct(List<Product> productList) {
+        return productList.stream()
+                .max(Comparator.comparingInt(
+                                Product::getCost
+                        )
+                )
+                .orElseThrow();
+    }
+
+    public static Integer countUniqWord(String stringWord) {
+        return Arrays.asList(stringWord.split(" "))
+                .stream()
+                .collect(Collectors.toSet())
+                .size();
+    }
+
+    public static List<Student> sortGradeStudent(List<Student> studentList) {
+        return studentList.stream()
+                .sorted(Comparator.comparingDouble(
+                                student -> student.getGrades().stream()
+                                        .mapToInt(Integer::intValue)
+                                        .average
+                                        .orElse(0)
+                        )
+                        .reversed())
+                .collect(Collectors.toList()
+                );
     }
 }

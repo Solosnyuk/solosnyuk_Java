@@ -1,6 +1,6 @@
 package zadacaOne;
 
-public class MyThread extends Thread{
+public class MyThread implements Runnable{
     private final int threadNum;
 
     public MyThread(int threadNum) {
@@ -9,6 +9,10 @@ public class MyThread extends Thread{
 
     @Override
     public void run() {
+        if (threadNum == 3) {
+            throw new RuntimeException();
+        }
+
         for (int i = 0; i < 5; i++) {
             System.out.println(i + " from thread " + threadNum);
             try {
