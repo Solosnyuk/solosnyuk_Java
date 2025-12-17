@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
 
+        MyThread thread1 = new MyThread(1);
+        MyThread thread2 = new MyThread(2);
+        thread1.start();
+        thread2.start();
     }
 
     public static Map<String,List<Employee>> sortEmployee(List<Employee> employeeList) {
@@ -42,18 +46,5 @@ public class Main {
                 .limit(n)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
-    }
-
-    public static Map<String, List<Product>> getProductsByCategory(List<Order> orders) {
-        return orders.stream()
-                .flatMap(order -> order.products().stream())
-                .collect(Collectors.groupingBy(Product::category));
-    }
-
-    public static Map<Integer, List<Integer>> groupByDigitSum(List<Integer> numbers) {
-        return numbers.stream()
-                .collect(Collectors.groupingBy(
-                        NumberProcessor::sumOfDigits
-                ));
     }
 }
