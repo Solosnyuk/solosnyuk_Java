@@ -43,5 +43,17 @@ public class Main {
                 .orElseThrow();
     }
 
+    public static LinkedHashSet<String> stringList(List<String> stringList) {
+        return stringList.stream()
+                .sorted(Comparator.comparingInt(String::length))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 
+    public static List<String> filterStudent(Map<String, Integer> stringIntegerMap) {
+        return stringIntegerMap.entrySet().stream()
+                .filter(student -> student.getValue() > 80)
+                .sorted(Comparator.comparingInt(Map.Entry::getValue).reversed())
+                .map(Map.Entry::getKey)
+                .toList();
+    }
 }
