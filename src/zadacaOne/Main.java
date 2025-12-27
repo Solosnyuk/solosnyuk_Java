@@ -20,20 +20,20 @@ public class Main {
     public static Map<Integer, Long> countNum(List<Integer> integerList) {
         return integerList.stream()
                 .collect(Collectors.groupingBy(
-                    integer -> integer,
-                    Collectors.counting()
-                    )
+                                integer -> integer,
+                                Collectors.counting()
+                        )
                 );
     }
 
     public static Map<String, List<String>> groupAuthor(List<Book> bookList) {
         return bookList.stream()
                 .collect(Collectors.groupingBy(
-                    Book::getAothor,
-                    Collectors.mapping(
-                            Book::getName,Collectors.toList()
+                                Book::getAothor,
+                                Collectors.mapping(
+                                        Book::getName, Collectors.toList()
+                                )
                         )
-                    )
                 );
     }
 
@@ -49,11 +49,62 @@ public class Main {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public static List<String> filterStudent(Map<String, Integer> stringIntegerMap) {
-        return stringIntegerMap.entrySet().stream()
-                .filter(student -> student.getValue() > 80)
-                .sorted(Comparator.comparingInt(Map.Entry::getValue).reversed())
-                .map(Map.Entry::getKey)
+    //public static List<String> filterStudent(Map<String, Integer> stringIntegerMap) {
+    //    return stringIntegerMap.entrySet().stream()
+    //            .filter(student -> student.getValue() > 80)
+    //            .sorted(Comparator.comparingInt(Map.Entry::getValue).reversed())
+    //            .map(Map.Entry::getKey)
+    //            .toList();
+    //}
+
+    public static Map<Character, Long> countUniqSymbol(String string) {
+        return string.chars()
+                .mapToObj(c -> (char) c) // преобразуем в Character
+                .collect(Collectors.groupingBy(
+                        c -> c,
+                        Collectors.counting()
+                ));
+    }
+
+
+    public static List<Integer> topN(List<Integer> integerList) {
+        if (integerList.size() < 3) {
+            return integerList.stream()
+                    .sorted()
+                    .toList();
+        }
+        return integerList.stream()
+                .sorted()
+                .limit(3)
                 .toList();
     }
+
+    public static Map<Character, List<String>> groupFirstBeat(List<String> stringList) {
+        return stringList.stream()
+                .collect(Collectors.groupingBy(
+                                w -> w.charAt(0),
+                                Collectors.toList()
+                        )
+                );
+    }
+
+    public static Map<String, Double> groupProduct(List<Product> productList) {
+        return productList.stream()
+                .collect(Collectors.groupingBy(
+                        p -> p.getCategory(),
+                        Collectors.summingDouble(Product::getPrice)
+                ));
+    }
+
+    public static String maxLengthWord(List<String> stringList) {
+        return stringList.stream()
+                .sorted(
+                        Comparator
+                                .comparingInt(String::length)
+                                .reversed()
+                )
+                .limit(1)
+                .toString();
+    }
+
 }
