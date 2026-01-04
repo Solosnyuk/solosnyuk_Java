@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class codingBat {
     public static void main(String[] args) {
 
@@ -78,13 +81,13 @@ public class codingBat {
     }
 
     public String missingChar(String str, int n) {
-        return str.substring(0,n) + str.substring(n + 1, str.length());
+        return str.substring(0, n) + str.substring(n + 1, str.length());
     }
 
     public String frontBack(String str) {
         if (str.length() <= 1) return str;
-        String mid = str.substring(1, str.length()-1);
-        return str.charAt(str.length()-1) + mid + str.charAt(0);
+        String mid = str.substring(1, str.length() - 1);
+        return str.charAt(str.length() - 1) + mid + str.charAt(0);
     }
 
     public String front3(String str) {
@@ -95,7 +98,7 @@ public class codingBat {
             return str;
         }
 
-        return str.substring(0,3) + str.substring(0,3) + str.substring(0,3);
+        return str.substring(0, 3) + str.substring(0, 3) + str.substring(0, 3);
     }
 
     public String backAround(String str) {
@@ -103,17 +106,17 @@ public class codingBat {
     }
 
     public boolean or35(int n) {
-            if (n % 3 == 0 || n % 5 == 0){
-                return true;
-            }
-            return false;
+        if (n % 3 == 0 || n % 5 == 0) {
+            return true;
+        }
+        return false;
     }
 
     public String front22(String str) {
         if (str.length() <= 2) {
             return str + str + str;
         }
-        return str.substring(0,2) + str + str.substring(0,2);
+        return str.substring(0, 2) + str + str.substring(0, 2);
     }
 
     public boolean startHi(String str) {
@@ -160,14 +163,14 @@ public class codingBat {
     }
 
     public String delDel(String str) {
-        if (str.length()>=4 && str.substring(1, 4).equals("del")) {
+        if (str.length() >= 4 && str.substring(1, 4).equals("del")) {
             return str.substring(0, 1) + str.substring(4);
         }
         return str;
     }
 
     public boolean mixStart(String str) {
-        if (str.startsWith("ix",1)) {
+        if (str.startsWith("ix", 1)) {
             return true;
         }
         return false;
@@ -186,7 +189,7 @@ public class codingBat {
     }
 
     public int intMax(int a, int b, int c) {
-        return Math.max(a,Math.max(b,c));
+        return Math.max(a, Math.max(b, c));
     }
 
     public int close10(int a, int b) {
@@ -213,8 +216,8 @@ public class codingBat {
 
     public int max1020(int a, int b) {
         if (a < 21 && a > 9 &&
-        b < 21 && b > 9) {
-            return Math.max(a,b);
+                b < 21 && b > 9) {
+            return Math.max(a, b);
         }
         if (a < 21 && a > 9) {
             return a;
@@ -293,15 +296,55 @@ public class codingBat {
     }
 
     public String fizzString(String str) {
-        if (str.charAt(0) == 'f' && str.charAt(str.length() - 1) == 'b') {
+        if (str.startsWith("f") && str.endsWith("b")) {
             return "FizzBuzz";
-        }
-        else if (str.charAt(0) == 'f') {
+        } else if (str.startsWith("f")) {
             return "Fizz";
-        } else if (str.charAt(str.length() - 1) == 'b') {
+        } else if (str.endsWith("b")) {
             return "Buzz";
         }
-        return "";
+        return str;
     }
 
+    public String fizzString2(int n) {
+        if (n % 3 == 0 && n % 5 == 0) {
+            return "FizzBuzz!";
+        } else if (n % 3 == 0) {
+            return "Fizz";
+        } else if (n % 5 == 0) {
+            return "Buzz";
+        }
+        return n + "!";
+    }
+
+    public boolean twoAsOne(int a, int b, int c) {
+        if (a + b == c) {
+            return true;
+        } else if (a + c == b) {
+            return true;
+        } else if (b + c == a) {
+            return true;
+        }
+        return false;
+    }
+
+    public int makeChocolate(int small, int big, int goal) {
+        int maxBig = goal / 5;
+        int usedBig = Math.min(big, maxBig);
+        int remaining = goal - usedBig * 5;
+
+        if (remaining <= small) {
+            return remaining;
+        }
+        return -1;
+    }
+
+    public Map<String, Integer> word0(String[] strings) {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < strings.length; i++) {
+            map.put(strings[i], 0);
+        }
+    return map;
+    }
 }
