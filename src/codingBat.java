@@ -174,7 +174,134 @@ public class codingBat {
     }
 
     public String startOz(String str) {
+        if (str.length() > 1 && str.charAt(0) == 'o' && str.charAt(1) == 'z') {
+            return "oz";
 
+        } else if (str.length() > 0 && str.charAt(0) == 'o') {
+            return "o";
+        } else if (str.length() > 1 && str.charAt(1) == 'z') {
+            return "z";
+        }
+        return "";
+    }
+
+    public int intMax(int a, int b, int c) {
+        return Math.max(a,Math.max(b,c));
+    }
+
+    public int close10(int a, int b) {
+        int aDiff = Math.abs(a - 10);
+        int bDiff = Math.abs(b - 10);
+
+        if (aDiff < bDiff) {
+            return a;
+        }
+        if (bDiff < aDiff) {
+            return b;
+        }
+        return 0;
+    }
+
+    public boolean in3050(int a, int b) {
+        if (a >= 30 && a <= 40 && b >= 30 && b <= 40) {
+            return true;
+        } else if (a >= 40 && a <= 50 && b >= 40 && b <= 50) {
+            return true;
+        }
+        return false;
+    }
+
+    public int max1020(int a, int b) {
+        if (a < 21 && a > 9 &&
+        b < 21 && b > 9) {
+            return Math.max(a,b);
+        }
+        if (a < 21 && a > 9) {
+            return a;
+        }
+        if (b < 21 && b > 9) {
+            return b;
+        }
+        return 0;
+    }
+
+    public boolean stringE(String str) {
+        int count = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == 'e') {
+                count++;
+            }
+        }
+        if (count > 0 && count < 4) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean lastDigit(int a, int b) {
+        if (a % 10 == b % 10) {
+            return true;
+        }
+        return false;
+    }
+
+    public String endUp(String str) {
+        if (str.length() > 2) {
+            return str.substring(0, str.length() - 3) +
+                    str.substring(str.length() - 3).toUpperCase();
+        }
+        return str.toUpperCase();
+    }
+
+    public String everyNth(String str, int n) {
+        String string = "";
+
+        for (int i = 0; i < str.length(); i = i + n) {
+            string += str.charAt(i);
+        }
+        return string;
+    }
+
+    public int dateFashion(int you, int date) {
+        if (you > 2 && date >= 8) {
+            return 2;
+        } else if (you > 7 && date > 2) {
+            return 2;
+        } else if (you < 3 && date < 8) {
+            return 0;
+        } else if (you < 9 && date < 3) {
+            return 0;
+        } else if (you > 2 && date >= 8) {
+            return 2;
+        } else if (you > 7 && date > 2) {
+            return 2;
+        }
+        return 1;
+    }
+
+    public boolean squirrelPlay(int temp, boolean isSummer) {
+        if (!isSummer) {
+            if (temp >= 60 && temp <= 100) {
+                return true;
+            }
+        }
+        if (temp >= 60 && temp <= 90) {
+            return true;
+        }
+        return false;
+    }
+
+    public String fizzString(String str) {
+        if (str.charAt(0) == 'f' && str.charAt(str.length() - 1) == 'b') {
+            return "FizzBuzz";
+        }
+        else if (str.charAt(0) == 'f') {
+            return "Fizz";
+        } else if (str.charAt(str.length() - 1) == 'b') {
+            return "Buzz";
+        }
+        return "";
     }
 
 }
